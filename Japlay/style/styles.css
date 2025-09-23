@@ -88,3 +88,79 @@ footer {
     font-size: 1rem;
     color: #555;
 }
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 1rem;
+    }
+    
+    header {
+        margin-bottom: 3rem;
+    }
+    
+    main {
+        margin-bottom: 3rem;
+    }
+    
+    .start-button {
+        width: 80%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem;
+    }
+    
+    .container {
+        margin-top: 0.5rem;
+    }
+    
+    header {
+        margin-bottom: 2rem;
+    }
+    
+    main {
+        margin-bottom: 2rem;
+    }
+    
+    .question {
+        margin-bottom: 1.5rem;
+    }
+    
+    .start-button:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .start-button {
+        padding: 10px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* For large screens */
+@media (min-width: 1200px) {
+    .container {
+        margin-top: 3.5rem;
+    }
+    
+    header {
+        margin-bottom: 8rem;
+    }
+    
+    main {
+        margin-bottom: 8rem;
+    }
+}
