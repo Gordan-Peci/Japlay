@@ -8,13 +8,13 @@ let score = 0;
 document.getElementById('score').innerText = `Score: ${score}`;
 
 const levelN5 = [];
-for(let i =0; i < 22 * 40; i++){
-    levelN5.push(Math.floor(Math.random() * 4));
+for(let i =0; i < 11 * 20; i++){
+    levelN5.push(Math.floor(Math.random() * 6));
 }
 
-const tileSize = 32; // Size of each tile in pixels
-const rows = 22; // Number of rows in the grid
-const cols = 40; // Number of columns in the grid
+const tileSize = 64; // Size of each tile in pixels
+const rows = 11; // Number of rows in the grid
+const cols = 20; // Number of columns in the grid
 
 canvas.width = tileSize * cols;
 canvas.height = tileSize * rows;
