@@ -7,38 +7,138 @@ document.getElementById('gameTitle').innerText = levels[0];
 let score = 0;
 document.getElementById('score').innerText = `Score: ${score}`;
 
-const levelN5 = [];
-for(let i =0; i < 11 * 20; i++){
-    levelN5.push(Math.floor(Math.random() * 6));
+const tileSize = 32;
+const xTiles = 41;
+const yTiles = 21;
+canvas.width = tileSize * xTiles;
+canvas.height = tileSize * yTiles;
+
+//color for N5 level
+const colorN5 = "#808081";
+
+// Initialize tile arrays for each level
+const lvlN5Tiles = Array.from({ length: yTiles }, () => Array(xTiles).fill(0));
+const lvlN4Tiles = Array.from({ length: yTiles }, () => Array(xTiles).fill(0));
+const lvlN3Tiles = Array.from({ length: yTiles }, () => Array(xTiles).fill(0));
+const lvlN2Tiles = Array.from({ length: yTiles }, () => Array(xTiles).fill(0));
+const lvlN1Tiles = Array.from({ length: yTiles }, () => Array(xTiles).fill(0));
+
+// Function to draw walls around the edges of the canvas
+function drawWalls(color) {
+    for (let y=0; y<yTiles; y++) {
+        lvlN5Tiles[y][0] = 1;
+        ctx.fillStyle = color;
+        ctx.fillRect(0, y*tileSize, tileSize, tileSize);
+        lvlN5Tiles[y][xTiles-1] = 1;
+        ctx.fillStyle = color;
+        ctx.fillRect((xTiles-1)*tileSize, y*tileSize, tileSize, tileSize);
+    }
+    for (let x=0; x<xTiles; x++) {
+        lvlN5Tiles[0][x] = 1;
+        ctx.fillStyle = color;
+        ctx.fillRect(x*tileSize, 0, tileSize, tileSize);
+        lvlN5Tiles[yTiles-1][x] = 1;
+        ctx.fillStyle = color;
+        ctx.fillRect(x*tileSize, (yTiles-1)*tileSize, tileSize, tileSize);
+    }
 }
 
-const tileSize = 64; // Size of each tile in pixels
-const rows = 11; // Number of rows in the grid
-const cols = 20; // Number of columns in the grid
+// Function to create different level types for N5
+function lvlTypesN5(color) {
+    let type = Math.floor(Math.random() * 3) + 1; // Randomly select type 1, 2, or 3
+    const centerX = Math.floor(xTiles / 2); // 20
+    const centerY = Math.floor(yTiles / 2); // 10
+    const gap = 3;
 
-canvas.width = tileSize * cols;
-canvas.height = tileSize * rows;
+    if (type === 1) {
+        // Top side of square (3 tiles wide)
+        lvlN5Tiles[centerY-gap-1][centerX-1] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX+1] = 1;
+        ctx.fillRect((centerX-1)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect(centerX*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+1)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
 
-const tileImage = new Image();
-tileImage.src = "assets/tileSetN5.png"; // Path to the tile image
-const imageCols = tileImage.width / tileSize; // Number of columns in the tile image
-const imageRows = tileImage.height / tileSize; // Number of rows in the tile image
+        // Bottom side of square (3 tiles wide)
+        lvlN5Tiles[centerY+gap+1][centerX-1] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX+1] = 1;
+        ctx.fillRect((centerX-1)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect(centerX*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+1)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
 
-function getTile(map,col,row){
-    return map[row * cols + col];
+        // Left side of square (3 tiles tall)
+        lvlN5Tiles[centerY-1][centerX-gap-1] = 1;
+        lvlN5Tiles[centerY][centerX-gap-1] = 1;
+        lvlN5Tiles[centerY+1][centerX-gap-1] = 1;
+        ctx.fillRect((centerX-gap-1)*tileSize, (centerY-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-1)*tileSize, centerY*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-1)*tileSize, (centerY+1)*tileSize, tileSize, tileSize);
+
+        // Right side of square (3 tiles tall)
+        lvlN5Tiles[centerY-1][centerX+gap+1] = 1;
+        lvlN5Tiles[centerY][centerX+gap+1] = 1;
+        lvlN5Tiles[centerY+1][centerX+gap+1] = 1;
+        ctx.fillRect((centerX+gap+1)*tileSize, (centerY-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+1)*tileSize, centerY*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+1)*tileSize, (centerY+1)*tileSize, tileSize, tileSize);
+
+    }
+    else if (type === 2) {
+        lvlN5Tiles[centerY-gap-1][centerX-gap-1] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX-gap-2] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX-gap-3] = 1;
+        ctx.fillRect((centerX-gap-1)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-2)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-3)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY+gap+1][centerX-gap-1] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX-gap-2] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX-gap-3] = 1;
+        ctx.fillRect((centerX-gap-1)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-2)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-3)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY-gap-1][centerX+gap+1] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX+gap+2] = 1;
+        lvlN5Tiles[centerY-gap-1][centerX+gap+3] = 1;
+        ctx.fillRect((centerX+gap+1)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+2)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+3)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY+gap+1][centerX+gap+1] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX+gap+2] = 1;
+        lvlN5Tiles[centerY+gap+1][centerX+gap+3] = 1;
+        ctx.fillRect((centerX+gap+1)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+2)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+3)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+    }
+    else{
+        lvlN5Tiles[centerY-gap-1][centerX] = 1;
+        lvlN5Tiles[centerY-gap-2][centerX] = 1;
+        lvlN5Tiles[centerY-gap-3][centerX] = 1;
+        ctx.fillRect((centerX)*tileSize, (centerY-gap-1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX)*tileSize, (centerY-gap-2)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX)*tileSize, (centerY-gap-3)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY+gap+1][centerX] = 1;
+        lvlN5Tiles[centerY+gap+2][centerX] = 1;
+        lvlN5Tiles[centerY+gap+3][centerX] = 1;
+        ctx.fillRect((centerX)*tileSize, (centerY+gap+1)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX)*tileSize, (centerY+gap+2)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX)*tileSize, (centerY+gap+3)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY][centerX-gap-1] = 1;
+        lvlN5Tiles[centerY][centerX-gap-2] = 1;
+        lvlN5Tiles[centerY][centerX-gap-3] = 1;
+        ctx.fillRect((centerX-gap-1)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-2)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX-gap-3)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+        lvlN5Tiles[centerY][centerX+gap+1] = 1;
+        lvlN5Tiles[centerY][centerX+gap+2] = 1;
+        lvlN5Tiles[centerY][centerX+gap+3] = 1;
+        ctx.fillRect((centerX+gap+1)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+2)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+        ctx.fillRect((centerX+gap+3)*tileSize, (centerY)*tileSize, tileSize, tileSize);
+    }
 }
 
-function drawLevel(level){
-    for(let row = 0; row < rows; row++){
-        for(let col = 0; col < cols; col++){
-            const tile = getTile(level, col, row);
-            ctx.drawImage(tileImage, (tile % imageCols) * tileSize, Math.floor(tile / imageCols) * tileSize, tileSize, tileSize, col * tileSize, row * tileSize, tileSize, tileSize);
-        }   
-    }  
-}
-
-function startGame() {
-    canvas.width = cols * tileSize;
-    canvas.height = rows * tileSize;
-    drawLevel(levelN5);
+window.startGame = function() {
+    drawWalls(colorN5);
+    lvlTypesN5(colorN5);
 }
