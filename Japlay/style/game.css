@@ -41,8 +41,6 @@ body.fade-in {
 .game-canvas{
     background-color: #d9d6c8ff;
     display: block;
-    width: 1200px;
-    height: 750px;
 }
 
 .score-display{
