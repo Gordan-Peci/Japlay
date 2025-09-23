@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/game.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <title>Japlay</title>
 </head>
-<body>
+<body onload="startGame()">
+    <div>
+        <header class="container">
+            <h1 id="gameTitle" class="game-title"></h1>
+        </header>
+        <main>
+            <canvas id="gameCanvas" class="game-canvas"></canvas>
+            <h3 id="score" class="score-display"></h3>
+        </main>
+    </div>
+
     <script src="scripts/transition.js"></script>
+    <script src="scripts/game.js"></script>
 </body>
 </html>

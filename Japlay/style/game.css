@@ -3,6 +3,17 @@
     padding: 0;
     box-sizing: border-box;
     background-color: #e3e1d7;
+    font-family: 'Fugaz One', cursive;
+}
+
+body{
+    font-family: 'Fugaz One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 body {
@@ -12,4 +23,30 @@ body {
 
 body.fade-in {
     opacity: 1;
+}
+
+.container {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: auto;
+}
+
+.game-title{
+    font-size: 3rem;
+    color: #333;
+}
+
+.game-canvas{
+    background-color: #d9d6c8ff;
+    display: block;
+    width: 1200px;
+    height: 750px;
+}
+
+.score-display{
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    color: #333;
 }
