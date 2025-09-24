@@ -162,6 +162,7 @@ function drawLevel() {
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    updatePlayerVelocity();
     drawLevel();
     drawPlayer();
     requestAnimationFrame(gameLoop);
