@@ -41,10 +41,90 @@ body.fade-in {
 .game-canvas{
     background-color: #d9d6c8ff;
     display: block;
+    position: relative;
 }
 
-.score-display{
+.score-display, .timer-display{
     margin-top: 0.5rem;
     font-size: 2rem;
     color: #333;
+}
+
+.class-picker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: #e3e1d7;
+    opacity: 95%;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 0px;
+}
+
+main{
+    position: relative;
+    display: inline-block;
+}
+
+.choice-text{
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.sword, .mace, .bow{
+    font-family: 'Fugaz One', cursive;
+    background-color: whitesmoke;
+    border: none;
+    font-size: 15px;
+    padding: 15px 40px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sword:hover{
+    background-color: #ff3434;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.mace:hover{
+    background-color: #4649e4;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.bow:hover{
+background-color: #21cc29;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.bottom-values {
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite corners */
+    align-items: center;
+    width: 100%;
+    padding: 0 20px; /* Add some padding */
+}
+
+.timer-display {
+    /* Timer will be on the right */
+    margin-left: auto; /* Pushes to the right */
+}
+
+.score-display {
+    /* Score will be on the left */
+    margin-right: auto; /* Pushes to the left */
 }

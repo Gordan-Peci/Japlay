@@ -14,7 +14,7 @@ canvas.width = tileSize * xTiles;
 canvas.height = tileSize * yTiles;
 
 // Player object
-function PlayerObj(x, y, vx, vy, radius, color, direction) {
+function PlayerObj(x, y, vx, vy, radius, color, direction, type) {
     this.x = x;
     this.y = y;
     this.vx = vx;
@@ -22,18 +22,8 @@ function PlayerObj(x, y, vx, vy, radius, color, direction) {
     this.radius = radius;
     this.color = color;
     this.direction = direction;
+    this.type = type;
 }
-
-// Initialize player in the center of the canvas (Later will be able to change the player type  and color)
-const player = new PlayerObj(
-    canvas.width / 2,
-    canvas.height / 2,
-    0,
-    0,
-    tileSize / 2,
-    '#f04c4cff',
-    0
-);
 
 // Function to update and draw the player
 function drawPlayer() {
@@ -162,9 +152,11 @@ function drawLevel() {
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    updatePlayerVelocity();
-    drawLevel();
-    drawPlayer();
+     if (gameState === 'playing' && player) {
+        drawPlayer();
+        updatePlayerVelocity();
+        drawLevel();
+    }
     requestAnimationFrame(gameLoop);
 }
 

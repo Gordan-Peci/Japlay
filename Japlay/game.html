@@ -13,14 +13,25 @@
             <h1 id="gameTitle" class="game-title"></h1>
         </header>
         <main>
-            <canvas id="gameCanvas" class="game-canvas"></canvas>
-            <h3 id="score" class="score-display"></h3>
+            <div id="classPicker" class="class-picker">
+                <h3 class="choiceTxt" class="choice-text">Choose your class</h3>
+                <button id="sword" class="sword">Sword</button>
+                <button id="mace" class="mace">Mace</button>
+                <button id="bow" class="bow">Bow</button>
+            </div>
+            <canvas id="gameCanvas" class="game-canvas">
+            </canvas>
         </main>
+        <div class="bottom-values">
+            <h3 id="score" class="score-display"></h3>
+            <h3 id="timerDisplay" class="timer-display">Time: 60s</h3>
+        </div>
     </div>
 
     <script src="scripts/transition.js"></script>
     <script src="scripts/game.js"></script>
     <script src="scripts/inputHandler.js"></script>
     <script src="scripts/collisions.js"></script>
+    <script src="scripts/gameState.js"></script>
 </body>
 </html>
