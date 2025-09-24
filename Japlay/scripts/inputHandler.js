@@ -16,10 +16,22 @@ function updatePlayerVelocity() {
     let moveY = 0;
 
     // Calculate desired movement
-    if (keys['w']) moveY = -speed;
-    if (keys['s']) moveY = speed;
-    if (keys['a']) moveX = -speed;
-    if (keys['d']) moveX = speed;
+    if (keys['w']) {
+        moveY = -speed;
+        player.direction = 'up';
+    }
+    if (keys['s']) {
+        moveY = speed;
+        player.direction = 'down';
+    }
+    if (keys['a']) {
+        moveX = -speed;
+        player.direction = 'left';
+    }
+    if (keys['d']) {
+        moveX = speed;
+        player.direction = 'right';
+    }
 
     // Apply diagonal normalization
     if (moveX !== 0 && moveY !== 0) {
@@ -36,5 +48,4 @@ function updatePlayerVelocity() {
     if (moveY !== 0 && canMoveTo(player.x, player.y + moveY)) {
         player.y += moveY;
     }
-
 }
