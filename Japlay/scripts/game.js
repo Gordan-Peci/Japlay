@@ -152,15 +152,25 @@ function drawLevel() {
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-     if (gameState === 'playing' && player) {
+    
+    if (gameState === 'playing' && player) {
         drawPlayer();
         updatePlayerVelocity();
         drawLevel();
+        requestAnimationFrame(gameLoop);
+    } else if (gameState === 'outOfTime') {
+        // Game is over, don't continue the loop
+        // The outOfTime div is already visible from gameOver() function
+        return;
+    } else {
+        requestAnimationFrame(gameLoop);
     }
-    requestAnimationFrame(gameLoop);
 }
 
-// Start the game
-window.startGame = function() {
+function selectClass(choice) {
+    classChoice = choice;
+    gameState = 'playing';
+    initializePlayer();
+    startTimerFunc();
     gameLoop();
-} 
+}
