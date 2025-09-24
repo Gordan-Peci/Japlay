@@ -13,22 +13,35 @@ const yTiles = 21;
 canvas.width = tileSize * xTiles;
 canvas.height = tileSize * yTiles;
 
+// Player object
+function PlayerObj(x, y, vx, vy, radius, color, direction) {
+    this.x = x;
+    this.y = y;
+    this.vx = vx;
+    this.vy = vy;
+    this.radius = radius;
+    this.color = color;
+    this.direction = direction;
+}
 
-let x = canvas.width / 2;
-let y = canvas.height / 2;
-let vx = 0;
-let vy = 0;
-let radius = tileSize / 2;
-let color = '#f04c4cff';
-
+// Initialize player in the center of the canvas (Later will be able to change the player type  and color)
+const player = new PlayerObj(
+    canvas.width / 2,
+    canvas.height / 2,
+    0,
+    0,
+    tileSize / 2,
+    '#f04c4cff',
+    0
+);
 
 // Function to update and draw the player
 function drawPlayer() {
-    x += vx;
-    y += vy;
+    player.x += player.vx;
+    player.y += player.vy;
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.fillStyle = color;
+    ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+    ctx.fillStyle = player.color;
     ctx.fill();
     ctx.closePath();
 }

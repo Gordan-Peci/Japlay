@@ -1,33 +1,29 @@
-// Input handler for player movement
+const keys = {};
+let diagonalFactor = 1 / Math.sqrt(2);
+
 
 addEventListener('keydown', function(event) {
-    let speed = tileSize / 10; // Adjust speed as needed
-    switch(event.key) {
-        case 'w': 
-        console.log('up');
-           vy = -speed;
-            break;
-        case 's':
-            vy = speed;
-            break
-        case 'a':
-            vx = -speed;
-            break;
-        case 'd':
-            vx = speed;
-            break;
-    }
+    keys[event.key] = true;
+    updatePlayerVelocity();
 });
 
 addEventListener('keyup', function(event) {
-    switch(event.key) {
-        case 'w':
-        case 's':
-            vy = 0;
-            break;
-        case 'a':
-        case 'd':
-            vx = 0;
-            break;
-    }
+    keys[event.key] = false;
+    updatePlayerVelocity();
 });
+
+function updatePlayerVelocity() {
+    let speed = tileSize/10;
+    player.vx = 0;
+    player.vy = 0;
+
+    if(keys['w']) player.vy = -speed;
+    if(keys['s']) player.vy = speed;
+    if(keys['a']) player.vx = -speed;
+    if(keys['d']) player.vx = speed;
+
+    if (player.vx !== 0 && player.vy !== 0) {
+        player.vx *= diagonalFactor;
+        player.vy *= diagonalFactor;
+    }
+}
