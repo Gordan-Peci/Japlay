@@ -81,6 +81,47 @@ body.fade-in {
     display: none;
 }
 
+.question-display {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 85%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: #e3e1d7;
+    opacity: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 0px;
+    display: none;
+}
+
+.answer-button-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    gap: 15px;
+}
+
+.answer1, .answer2, .answer3, .answer4 {
+    font-family: 'Fugaz One', cursive;
+    background-color: whitesmoke;
+    border: none;
+    font-size: 14px;
+    padding: 10px 25px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.answer1:hover, .answer2:hover, .answer3:hover, .answer4:hover{
+    background-color: #ff3434;
+    color: white;
+    cursor: pointer;
+}
+
 main{
     position: relative;
     display: inline-block;

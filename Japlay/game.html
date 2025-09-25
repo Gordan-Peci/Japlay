@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <title>Japlay</title>
 </head>
-<body onload="startGame()">
+<body>
     <div>
         <header class="container">
             <h1 id="gameTitle" class="game-title"></h1>
@@ -23,6 +23,15 @@
                 <h3 id="endByTimeTitle" class="end-by-time-title">OUT OF TIME</h3>
                 <p id="endOfTimeScoreDisplay"></p>
             </div>
+            <div id="questionDisplay" class="question-display">
+                <p id="questionText" class="question-text"></p>
+                <div class="answer-button-box">
+                    <button id="answer1" class="answer1"></button>
+                <button id="answer2" class="answer2"></button>
+                <button id="answer3" class="answer3"></button>
+                <button id="answer4" class="answer4"></button>
+                </div>
+            </div>
             <canvas id="gameCanvas" class="game-canvas">
             </canvas>
         </main>
@@ -37,5 +46,6 @@
     <script src="scripts/inputHandler.js"></script>
     <script src="scripts/collisions.js"></script>
     <script src="scripts/gameState.js"></script>
+    <script src="scripts/questions.js"></script>
 </body>
 </html>

@@ -160,7 +160,6 @@ function gameLoop() {
         requestAnimationFrame(gameLoop);
     } else if (gameState === 'outOfTime') {
         // Game is over, don't continue the loop
-        // The outOfTime div is already visible from gameOver() function
         return;
     } else {
         requestAnimationFrame(gameLoop);
@@ -173,4 +172,6 @@ function selectClass(choice) {
     initializePlayer();
     startTimerFunc();
     gameLoop();
+    nextQuestion();
+    document.getElementById('questionDisplay').style.display = "block";
 }
