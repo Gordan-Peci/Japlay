@@ -126,14 +126,46 @@ function displayQuestion(question) {
 
 function checkAnswer(selectedIndex) {
     const isCorrect = selectedIndex === currentQuestion.shuffledCorrectIndex;
+
+    showAnswerFeedback(isCorrect);
     
     if (isCorrect) {
         console.log("Correct answer!");
+        score += 10;
+        document.getElementById('score').innerText = `Score: ${score}`;
     } else {
         console.log("Wrong answer");
+        timeLeft -= 5;
+        if (timeLeft < 0) timeLeft = 0;
+        document.getElementById('timerDisplay').textContent = `Time: ${timeLeft}s`;
     }
     
-    nextQuestion();
+    // HIDE THE QUESTION DISPLAY AFTER ANSWERING
+    document.getElementById('questionDisplay').style.display = "none";
+    
+    // Resume the game
+    gameState = 'playing';
+}
+
+function showAnswerFeedback(isCorrect) {
+    const feedback = document.getElementById('answerFeedback');
+    const feedbackText = document.getElementById('feedbackText');
+    
+    if (isCorrect) {
+        feedbackText.textContent = "CORRECT!";
+        feedback.className = "answer-feedback correct";
+    } else {
+        feedbackText.textContent = "WRONG!";
+        feedback.className = "answer-feedback wrong";
+    }
+    
+    // Show the feedback
+    feedback.style.display = "block";
+    
+    // Hide it after 1.5 seconds
+    setTimeout(() => {
+        feedback.style.display = "none";
+    }, 1000);
 }
 
 function shuffleArray(array) {

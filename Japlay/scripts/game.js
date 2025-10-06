@@ -36,6 +36,17 @@ function drawPlayer() {
     ctx.closePath();
 }
 
+let enemies = [];
+const maxEnemies = 5;
+
+// Enemy object (add with your other object definitions)
+function EnemyObj(x, y, radius, color) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.color = color;
+}
+
 //color for N5 level
 const colorN5 = "#808081";
 
@@ -153,15 +164,28 @@ function drawLevel() {
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    if (gameState === 'playing' && player) {
+    // ALWAYS draw the game state (even when paused)
+    drawLevel();
+    drawEnemies();
+    if (player) {
         drawPlayer();
+    }
+    
+    // Only update game logic when playing
+    if (gameState === 'playing' && player) {
         updatePlayerVelocity();
-        drawLevel();
+        checkEnemyCollisions();
         requestAnimationFrame(gameLoop);
-    } else if (gameState === 'outOfTime') {
-        // Game is over, don't continue the loop
+    } 
+    else if (gameState === 'question') {
+        // Game is paused for question - keep drawing but don't update
+        // The visual state is frozen but visible
+        requestAnimationFrame(gameLoop);
+    }
+    else if (gameState === 'outOfTime') {
         return;
-    } else {
+    } 
+    else {
         requestAnimationFrame(gameLoop);
     }
 }
@@ -170,8 +194,7 @@ function selectClass(choice) {
     classChoice = choice;
     gameState = 'playing';
     initializePlayer();
+    initializeEnemies();
     startTimerFunc();
     gameLoop();
-    nextQuestion();
-    document.getElementById('questionDisplay').style.display = "block";
 }

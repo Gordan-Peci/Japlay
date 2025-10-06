@@ -185,3 +185,48 @@ background-color: #21cc29;
     /* Score will be on the left */
     margin-right: auto; /* Pushes to the left */
 }
+
+.answer-feedback {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-size: 72px;
+    font-weight: bold;
+    z-index: 1000;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+    font-family: 'Fugaz One', cursive;
+    animation: slideInOut 1s ease-in-out;
+    white-space: nowrap;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.answer-feedback.correct {
+    color: #2ecc71;
+}
+
+.answer-feedback.wrong {
+    color: #e74c3c;
+}
+
+@keyframes slideInOut {
+    0% { 
+        opacity: 0;
+        transform: translateX(-100%) translateY(-50%) rotate(-5deg);
+    }
+    20% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+    80% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(-5deg) scale(0.8);
+    }
+}
