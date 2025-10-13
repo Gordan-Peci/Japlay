@@ -212,6 +212,37 @@ background-color: #21cc29;
     color: #e74c3c;
 }
 
+.hp-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.hp-label {
+    color: white;
+    font-family: 'Fugaz One', sans-serif;
+    font-size: 18px;
+}
+
+.hp-display {
+    display: flex;
+    gap: 8px;
+}
+
+.hp-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    border: 2px solid white;
+    transition: background-color 0.3s ease;
+}
+
+.hp-circle.lost {
+    background-color: #444;
+}
+
 @keyframes slideInOut {
     0% { 
         opacity: 0;

@@ -561,6 +561,10 @@ function checkAnswer(selectedIndex) {
         document.getElementById('score').innerText = `Score: ${score}`;
     } else {
         console.log("Wrong answer");
+        // Decrease HP when answer is wrong
+        decreaseHP();
+        
+        // Also decrease time as before
         timeLeft -= 5;
         if (timeLeft < 0) timeLeft = 0;
         document.getElementById('timerDisplay').textContent = `Time: ${timeLeft}s`;

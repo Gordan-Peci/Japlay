@@ -7,6 +7,48 @@ document.getElementById('gameTitle').innerText = levels[0];
 let score = 0;
 document.getElementById('score').innerText = `Score: ${score}`;
 
+let playerHP = 3;
+
+function createHPDisplay() {
+    const hpDisplay = document.getElementById('hpDisplay');
+    hpDisplay.innerHTML = ''; // Clear existing
+    
+    for (let i = 0; i < 3; i++) {
+        const hpCircle = document.createElement('div');
+        hpCircle.className = i < playerHP ? 'hp-circle' : 'hp-circle lost';
+        hpDisplay.appendChild(hpCircle);
+    }
+}
+
+// Function to update HP display
+function updateHPDisplay() {
+    const hpCircles = document.querySelectorAll('.hp-circle');
+    hpCircles.forEach((circle, index) => {
+        circle.className = index < playerHP ? 'hp-circle' : 'hp-circle lost';
+    });
+}
+
+// Function to decrease player HP
+function decreaseHP() {
+    if (playerHP > 0) {
+        playerHP--;
+        updateHPDisplay();
+        
+        if (playerHP <= 0) {
+            gameState = 'Dead'
+            gameOver();
+        }
+    }
+}
+
+// Function to increase player HP
+function increaseHP() {
+    if (playerHP < 3) {
+        playerHP++;
+        updateHPDisplay();
+    }
+}
+
 const tileSize = 32;
 const xTiles = 41;
 const yTiles = 21;
@@ -182,9 +224,10 @@ function gameLoop() {
         // The visual state is frozen but visible
         requestAnimationFrame(gameLoop);
     }
-    else if (gameState === 'outOfTime') {
+    else if (gameState === 'Dead') {
+        // Game over state - don't continue the loop
         return;
-    } 
+    }
     else {
         requestAnimationFrame(gameLoop);
     }
@@ -193,6 +236,7 @@ function gameLoop() {
 function selectClass(choice) {
     classChoice = choice;
     gameState = 'playing';
+    createHPDisplay();
     initializePlayer();
     initializeEnemies();
     startTimerFunc();

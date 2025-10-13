@@ -4,12 +4,15 @@ let diagonalFactor = 1 / Math.sqrt(2);
 
 addEventListener('keydown', function(event) {
     keys[event.key] = true;
+    
+    if (gameState !== 'playing') {
+        return;
+    }
 });
 
 addEventListener('keyup', function(event) {
     keys[event.key] = false;
 });
-
 function updatePlayerVelocity() {
     const speed = tileSize / 10;
     let moveX = 0;

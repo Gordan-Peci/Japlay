@@ -62,7 +62,7 @@ function startTimerFunc(){
 }
 
 function gameOver() {
-    gameState = 'outOfTime';
+    gameState = 'Dead';
     clearInterval(countdown);
     
     // Stop player movement
@@ -70,6 +70,9 @@ function gameOver() {
         player.vx = 0;
         player.vy = 0;
     }
+    
+    // Stop enemy movement and clear enemies
+    enemies = [];
     
     // Show out of time message
     document.getElementById('outOfTime').style.display = "block";
