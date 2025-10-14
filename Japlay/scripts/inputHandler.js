@@ -14,7 +14,7 @@ addEventListener('keyup', function(event) {
     keys[event.key] = false;
 });
 function updatePlayerVelocity() {
-    const speed = tileSize / 10;
+    const speed = 2;
     let moveX = 0;
     let moveY = 0;
 

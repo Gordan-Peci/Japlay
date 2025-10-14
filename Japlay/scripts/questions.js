@@ -502,6 +502,9 @@ const jlptN5Questions = [
 
 ];
 
+let questionCounter = 0;
+let untilNextUpgrade = 3;
+
 let usedQuestions = [];
 let currentQUestion = null;
 
@@ -558,6 +561,8 @@ function checkAnswer(selectedIndex) {
     if (isCorrect) {
         console.log("Correct answer!");
         score += 10;
+        questionCounter += 1;
+        checkUntilNextUpgrade();
         document.getElementById('score').innerText = `Score: ${score}`;
     } else {
         console.log("Wrong answer");
@@ -596,6 +601,15 @@ function showAnswerFeedback(isCorrect) {
     setTimeout(() => {
         feedback.style.display = "none";
     }, 1000);
+}
+
+function checkUntilNextUpgrade(){
+    if(questionCounter == untilNextUpgrade){
+        console.log("Upgrade radi")
+        if (untilNextUpgrade<20){
+            untilNextUpgrade +=2;
+        }
+    }
 }
 
 function shuffleArray(array) {
